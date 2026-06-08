@@ -1,0 +1,214 @@
+{
+  "corpus": "corpus/documents.json",
+  "options": {
+    "size": 120,
+    "overlap": 30,
+    "strategy": "heading",
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "index": {
+    "chunks": 40,
+    "documents": 20,
+    "terms": 790,
+    "avgdl": 51.95
+  },
+  "queries": [
+    {
+      "query": "webhook signature timestamp tolerance",
+      "results": [
+        {
+          "chunk_id": "webhooks-signing::0",
+          "score": 11.275567
+        },
+        {
+          "chunk_id": "security-audit-logs::1",
+          "score": 3.342239
+        },
+        {
+          "chunk_id": "webhooks-retries::0",
+          "score": 2.775142
+        },
+        {
+          "chunk_id": "guides-migration::0",
+          "score": 2.043338
+        },
+        {
+          "chunk_id": "guides-onboarding::0",
+          "score": 2.043338
+        }
+      ]
+    },
+    {
+      "query": "cursor pagination limit",
+      "results": [
+        {
+          "chunk_id": "api-pagination::0",
+          "score": 10.693319
+        },
+        {
+          "chunk_id": "security-audit-logs::0",
+          "score": 5.065799
+        },
+        {
+          "chunk_id": "data-export::1",
+          "score": 3.527046
+        },
+        {
+          "chunk_id": "api-rate-limits::0",
+          "score": 3.092373
+        },
+        {
+          "chunk_id": "api-rate-limits::1",
+          "score": 2.250102
+        }
+      ]
+    },
+    {
+      "query": "refund window payment method",
+      "results": [
+        {
+          "chunk_id": "billing-refunds::0",
+          "score": 9.47157
+        },
+        {
+          "chunk_id": "data-regions::1",
+          "score": 4.157677
+        },
+        {
+          "chunk_id": "billing-proration::1",
+          "score": 3.12027
+        },
+        {
+          "chunk_id": "billing-refunds::1",
+          "score": 2.293739
+        },
+        {
+          "chunk_id": "billing-invoices::0",
+          "score": 2.144141
+        }
+      ]
+    },
+    {
+      "query": "SAML signed assertions",
+      "results": [
+        {
+          "chunk_id": "security-sso::0",
+          "score": 12.478669
+        },
+        {
+          "chunk_id": "data-export::0",
+          "score": 2.567164
+        },
+        {
+          "chunk_id": "billing-plans::0",
+          "score": 2.513187
+        },
+        {
+          "chunk_id": "security-audit-logs::1",
+          "score": 2.354524
+        },
+        {
+          "chunk_id": "webhooks-signing::1",
+          "score": 2.007954
+        }
+      ]
+    },
+    {
+      "query": "recovery time objective restore",
+      "results": [
+        {
+          "chunk_id": "ops-backups::0",
+          "score": 15.823674
+        },
+        {
+          "chunk_id": "ops-backups::1",
+          "score": 3.914574
+        },
+        {
+          "chunk_id": "webhooks-retries::1",
+          "score": 1.929404
+        },
+        {
+          "chunk_id": "api-rate-limits::1",
+          "score": 1.786477
+        },
+        {
+          "chunk_id": "webhooks-signing::0",
+          "score": 1.424642
+        }
+      ]
+    },
+    {
+      "query": "rate limit headers burst",
+      "results": [
+        {
+          "chunk_id": "api-rate-limits::0",
+          "score": 10.488124
+        },
+        {
+          "chunk_id": "data-export::1",
+          "score": 6.147635
+        },
+        {
+          "chunk_id": "api-rate-limits::1",
+          "score": 4.704294
+        },
+        {
+          "chunk_id": "billing-proration::1",
+          "score": 2.05443
+        },
+        {
+          "chunk_id": "api-errors::1",
+          "score": 2.015482
+        }
+      ]
+    },
+    {
+      "query": "SCIM deprovision revoke sessions",
+      "results": [
+        {
+          "chunk_id": "security-scim::0",
+          "score": 9.534737
+        },
+        {
+          "chunk_id": "security-scim::1",
+          "score": 4.157198
+        },
+        {
+          "chunk_id": "security-audit-logs::0",
+          "score": 2.228228
+        },
+        {
+          "chunk_id": "api-auth::0",
+          "score": 2.076798
+        }
+      ]
+    },
+    {
+      "query": "export signed URL expiry",
+      "results": [
+        {
+          "chunk_id": "data-export::0",
+          "score": 8.162855
+        },
+        {
+          "chunk_id": "security-sso::0",
+          "score": 5.620292
+        },
+        {
+          "chunk_id": "security-audit-logs::1",
+          "score": 4.688243
+        },
+        {
+          "chunk_id": "data-regions::0",
+          "score": 3.63868
+        },
+        {
+          "chunk_id": "api-pagination::1",
+          "score": 3.055039
+        }
+      ]
+    }
+  ]
+}
