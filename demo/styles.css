@@ -1,0 +1,137 @@
+/* RAGForge demo — additions on top of the shared Arvion stylesheet. */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* ---------- ask form and answer ------------------------------------------ */
+.chip {
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.chip:hover { border-color: var(--gold-line); color: var(--gold); text-decoration: none; }
+
+.answer {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+
+.cite {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+}
+.cite-marker {
+  width: 24px; height: 24px; border-radius: 7px;
+  display: grid; place-items: center;
+  background: var(--gold-soft); border: 1px solid var(--gold-line);
+  color: var(--gold); font: 600 12px var(--font-mono);
+}
+.cite-head { font-size: 13px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+.cite-head .muted { font-weight: 400; }
+.cite-quote { margin: 0; font-size: 13px; color: var(--text-2); line-height: 1.55; }
+.cite-foot { margin-top: 7px; font-size: 11px; color: var(--muted); }
+.cite-foot .mono { color: var(--text-2); }
+mark {
+  background: rgba(245, 194, 107, 0.16);
+  color: var(--gold);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* ---------- pipeline strip ------------------------------------------------ */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.pipeline:empty { display: none; }
+.step {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.step-label {
+  font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 4px;
+}
+.step-value { font: 600 18px var(--font-display); color: var(--text); font-variant-numeric: tabular-nums; }
+.step-note { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+/* ---------- retrieval score panel ---------------------------------------- */
+.hit { display: flex; flex-direction: column; gap: 6px; }
+.hit-head { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px; }
+.hit-title { color: var(--text); font-weight: 600; }
+.hit-score { margin-left: auto; font-family: var(--font-mono); color: var(--gold); font-size: 12px; }
+.hit-bar { height: 5px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
+.hit-bar > i { display: block; height: 100%; background: linear-gradient(90deg, #d9a548, var(--gold)); }
+.hit-text {
+  font-size: 11.5px; color: var(--muted); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.term-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.term {
+  font: 500 10.5px var(--font-mono);
+  color: var(--text-2);
+  background: rgba(58, 123, 255, 0.08);
+  border: 1px solid rgba(58, 123, 255, 0.22);
+  padding: 1px 6px; border-radius: 5px;
+}
+.term b { color: #8fb4ff; font-weight: 600; }
+
+/* ---------- providers ----------------------------------------------------- */
+.providers { display: flex; flex-direction: column; gap: 7px; font-size: 12px; }
+.provider { display: flex; align-items: center; gap: 8px; }
+.provider .who { color: var(--text-2); }
+.provider .why { margin-left: auto; color: var(--muted); font-size: 11px; font-family: var(--font-mono); }
+
+/* ---------- retrieval lab ------------------------------------------------- */
+.lab-row { cursor: pointer; }
+.lab-row.selected td { background: rgba(245, 194, 107, 0.06); }
+
+/* ---------- evaluation ---------------------------------------------------- */
+.metric-table td, .metric-table th { font-variant-numeric: tabular-nums; }
+.delta { font: 600 11px var(--font-mono); }
+.delta.ok { color: var(--green); }
+.delta.bad { color: var(--red); }
+.miss {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, auto);
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.miss:last-child { border-bottom: 0; }
+.miss-q { color: var(--text); font-size: 13px; }
+.miss-meta { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+.miss-got { font-family: var(--font-mono); font-size: 11px; color: var(--red); }
+.miss-got.want { color: var(--green); }
+.eval-mix-row { display: flex; align-items: center; gap: 10px; font-size: 12.5px; margin-bottom: 12px; }
+.eval-mix-row .bar { flex: 1; height: 6px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
+.eval-mix-row .bar > i { display: block; height: 100%; background: var(--gold); }
+
+/* ---------- corpus -------------------------------------------------------- */
+.doc-modal { max-height: 60vh; overflow: auto; }
+.doc-modal h3 { margin-bottom: 6px; }
+.doc-modal .doc-body { white-space: pre-wrap; font-size: 13px; line-height: 1.6; color: var(--text-2); }
+
+@media (max-width: 1080px) {
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
