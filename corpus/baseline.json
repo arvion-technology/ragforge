@@ -1,0 +1,73 @@
+{
+  "index": {
+    "chunks": 40,
+    "documents": 20,
+    "terms": 790,
+    "avgdl": 51.95,
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "labels": 36,
+  "rows": [
+    {
+      "k": 1,
+      "hit_rate": 0.9167,
+      "mrr": 0.9167,
+      "recall": 0.9167,
+      "queries": 36
+    },
+    {
+      "k": 3,
+      "hit_rate": 0.9444,
+      "mrr": 0.9306,
+      "recall": 0.9444,
+      "queries": 36
+    },
+    {
+      "k": 5,
+      "hit_rate": 0.9722,
+      "mrr": 0.9361,
+      "recall": 0.9722,
+      "queries": 36
+    },
+    {
+      "k": 10,
+      "hit_rate": 1.0,
+      "mrr": 0.9401,
+      "recall": 1.0,
+      "queries": 36
+    }
+  ],
+  "misses_at_1": [
+    {
+      "id": "q33",
+      "question": "Do I need to do anything when I outgrow my plan mid-month?",
+      "relevant": [
+        "billing-proration"
+      ],
+      "retrieved": [
+        "security-scim"
+      ]
+    },
+    {
+      "id": "q34",
+      "question": "Where is my data stored if the workspace is in Europe?",
+      "relevant": [
+        "data-regions"
+      ],
+      "retrieved": [
+        "billing-refunds"
+      ]
+    },
+    {
+      "id": "q35",
+      "question": "What compensation applies when the service is down for a full day?",
+      "relevant": [
+        "ops-incidents"
+      ],
+      "retrieved": [
+        "ops-backups"
+      ]
+    }
+  ]
+}

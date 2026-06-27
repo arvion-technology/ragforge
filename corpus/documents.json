@@ -1,0 +1,142 @@
+[
+  {
+    "id": "billing-plans",
+    "title": "Plans, seats and included usage",
+    "kind": "guide",
+    "updated": "2026-08-14",
+    "text": "Mesa has three plans. Starter includes three seats, 50,000 API events per month and community support. Team includes ten seats, 500,000 events, SAML single sign-on and a 99.9% uptime target. Enterprise is contracted: unlimited seats, a committed event volume, a dedicated success manager and custom data residency.\n\n## Seats\n\nA seat is any user who can sign in to the dashboard. Read-only viewers still consume a seat. Service accounts and API keys do not consume seats.\n\n## Overage\n\nEvents above the included volume are billed monthly at the overage rate on the order form. Overage never blocks ingestion; the API keeps accepting events and the account is invoiced at the end of the cycle. If overage exceeds 40% of the committed volume two months in a row, Mesa asks the account owner to move to a larger commitment."
+  },
+  {
+    "id": "billing-proration",
+    "title": "Mid-cycle changes and proration",
+    "kind": "reference",
+    "updated": "2026-07-02",
+    "text": "Plan changes take effect immediately. Mesa prorates the difference using the number of whole days remaining in the billing period, including the day of the change.\n\n## Upgrades\n\nAn upgrade issues an invoice for the prorated remainder and unlocks the new limits right away. Seats added mid-cycle are prorated the same way and removed seats do not generate a credit until the next renewal.\n\n## Downgrades\n\nA downgrade is scheduled for the next renewal date so the workspace keeps the features it has already paid for. If the current seat count or event volume exceeds the lower plan's limits, the downgrade is refused with the reason and the two numbers that conflict. No partial refund is issued for a downgrade, but an unused annual commitment is converted into a service credit when the contract allows it."
+  },
+  {
+    "id": "billing-invoices",
+    "title": "Invoices, tax and billing contacts",
+    "kind": "reference",
+    "updated": "2026-06-21",
+    "text": "Invoices are generated on the first day of each billing period and are available in the dashboard under Billing, then Invoices. Every invoice carries a sequential number, the service period, the tax breakdown and a payment link.\n\n## Tax identifiers\n\nAdd a VAT or GST identifier under Billing, then Tax details. Mesa validates the identifier against the relevant registry before the next invoice. A valid EU VAT number reverses the charge, so the invoice shows zero tax and the reverse-charge note. Tax identifiers added after an invoice is finalised apply to the following invoice.\n\n## Delivery\n\nInvoices are emailed to the billing contact and to the finance address if one is set. The PDF is generated in the workspace's region and never leaves it. Accounts on annual contracts can request consolidated quarterly invoicing through their success manager."
+  },
+  {
+    "id": "billing-refunds",
+    "title": "Refunds and cancellation",
+    "kind": "guide",
+    "updated": "2026-05-30",
+    "text": "Monthly subscriptions can be cancelled at any time from Billing, then Plan. Access continues until the end of the paid period and the subscription does not renew.\n\n## Refund window\n\nA first purchase can be refunded within 30 days of the charge, no questions asked. Later charges are refundable only when the service missed the uptime target or when a documented billing error occurred. Refunds are returned to the original payment method within ten business days.\n\n## Annual plans\n\nAnnual plans are refunded pro rata for whole unused months, minus any discount that was granted for paying annually. Refunds above 5,000 USD require a finance approval, which can take two business days.\n\n## Cancellation and data\n\nCancelling does not delete data immediately. The workspace becomes read-only for 30 days, then a retention job removes it. An export can be requested during that window from Data, then Exports."
+  },
+  {
+    "id": "api-auth",
+    "title": "API authentication and key scopes",
+    "kind": "reference",
+    "updated": "2026-08-01",
+    "text": "Every API request authenticates with a bearer token in the Authorization header. Tokens are created under Settings, then API keys. A token is shown once at creation and stored as a hash afterwards, so it cannot be recovered later.\n\n## Scopes\n\nEach key carries explicit scopes: events:write, events:read, exports:read, webhooks:manage and admin. A key without events:write is rejected with status 403 and error code missing_scope. Scopes cannot be widened after creation; create a new key instead.\n\n## Rotation\n\nMesa supports two active keys per workspace so a rotation never needs downtime. Create the replacement key, deploy it, then revoke the old key. Revocation takes effect within five seconds across all regions.\n\n## Test keys\n\nKeys prefixed mesa_test_ operate on a sandbox workspace with the same API surface but no billing consequences. Sandbox data resets every Sunday at 00:00 UTC."
+  },
+  {
+    "id": "api-errors",
+    "title": "Error format and retry guidance",
+    "kind": "reference",
+    "updated": "2026-07-19",
+    "text": "Errors use the application/problem+json media type. Every error body has type, title, status, code, detail and a request_id. Include the request_id when contacting support.\n\n## Retryable errors\n\nA 429 or any 5xx response is retryable with exponential backoff. A 409 on a create call means the idempotency key is still in flight; retry after one second. A 400, 401, 403 or 404 is not retryable: the request or the credential is wrong and repeating it will produce the same answer.\n\n## Validation errors\n\nValidation failures return 422 with an errors array. Each entry has a pointer such as /events/0/name and a message. The pointer follows JSON Pointer, so it can be applied to the request body directly.\n\n## Request ids\n\nrequest_id is a ULID and is echoed in the Mesa-Authorization-Request-Id response header. Log it. It is the only reliable way to correlate a failing client call with a server-side trace."
+  },
+  {
+    "id": "api-rate-limits",
+    "title": "Rate limits and quotas",
+    "kind": "reference",
+    "updated": "2026-08-05",
+    "text": "The API allows 600 requests per minute per key, measured over a sliding window. The event ingestion endpoint has a separate budget of 5,000 events per second per workspace.\n\n## Headers\n\nEvery response includes X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset, where Reset is a UNIX timestamp in seconds. When a limit is exceeded the response is 429 with a Retry-After header holding the number of seconds to wait.\n\n## Bursts\n\nThe limiter allows a burst of 100 requests above the sustained rate, refilling at ten requests per second. A client that batches events up to 500 per request rarely approaches the limit.\n\n## Quotas\n\nQuotas are the monthly event volumes from the plan, not a rate limit. They never reject requests; excess events are billed as overage. A misconfigured client cannot exhaust a quota silently because the usage endpoint reports current consumption in near real time."
+  },
+  {
+    "id": "api-pagination",
+    "title": "Cursor pagination",
+    "kind": "reference",
+    "updated": "2026-06-11",
+    "text": "List endpoints are cursor paginated. Pass limit up to 100 and the cursor from the previous response. The response shape is data, next_cursor and has_more. When has_more is false, next_cursor is null.\n\n## Ordering\n\nResults are ordered by creation time descending, then by id descending as a tie-breaker. Cursors encode both values, so an item created while you are paginating does not shift the pages and cannot be returned twice.\n\n## Stability\n\nCursors are opaque and expire after 24 hours. Do not parse them. A cursor from one filter set is rejected with 400 cursor_mismatch when reused with different filters; this prevents silent data loss when a client changes a query mid-pagination.\n\n## Export instead\n\nFor a full dump, use the exports endpoint rather than looping pages. Exports are streamed to object storage and are cheaper for both sides."
+  },
+  {
+    "id": "webhooks-signing",
+    "title": "Webhook signatures",
+    "kind": "reference",
+    "updated": "2026-08-12",
+    "text": "Every webhook delivery is signed. The signature is an HMAC-SHA256 over the string timestamp + \".\" + raw_body, using the endpoint secret. It is sent in the Mesa-Signature header as t=<unix seconds>,v1=<hex digest>.\n\n## Verification\n\nCompute the digest over the exact bytes received. Compare in constant time. Reject the delivery when the timestamp is more than five minutes from your clock, because that window bounds replay. Keep the raw body: re-serialising JSON changes key order and breaks the digest.\n\n## Secrets\n\nEach endpoint has its own secret, prefixed whsec_. Rotate a secret by adding the new one, accepting both for 24 hours, then removing the old one. The endpoint has up to three active secrets during rotation and the header contains one v1 value per active secret.\n\n## Test deliveries\n\nTest deliveries are signed with the same secret and carry a mesa_test event type, so a handler can be exercised end to end without waiting for a real event."
+  },
+  {
+    "id": "webhooks-retries",
+    "title": "Webhook delivery and retries",
+    "kind": "guide",
+    "updated": "2026-07-28",
+    "text": "A webhook is delivered when the receiver returns a 2xx status within ten seconds. Any other status, a timeout or a connection error schedules a retry.\n\n## Schedule\n\nMesa makes eight attempts: immediately, then after 1, 5, 20, 60, 180, 360 and 720 minutes. The delay is jittered by up to 10% so a fleet of endpoints does not retry in lockstep. After the eighth failure the event moves to the dead-letter queue.\n\n## Ordering\n\nDeliveries are at-least-once, not exactly-once. Order is not guaranteed across endpoints or across retries. Consumers should deduplicate on the event id and fetch current state from the API when an event only says that something changed.\n\n## Dead letters\n\nThe dead-letter queue is visible in the dashboard for seven days. A delivery can be replayed individually or by time range. Replays reuse the original event id, so an idempotent consumer treats them as duplicates."
+  },
+  {
+    "id": "data-retention",
+    "title": "Data retention and deletion",
+    "kind": "reference",
+    "updated": "2026-08-03",
+    "text": "Event data is retained according to the plan: 30 days on Starter, 400 days on Team and up to seven years on Enterprise. Aggregates outlive raw events, so dashboards keep their history after the underlying rows expire.\n\n## Deletion\n\nDeleting an event marks it deleted immediately and hides it from queries. A background job removes the row and its indexes within 30 days. A legal hold suspends that job for the affected workspace until the hold is released.\n\n## Workspace deletion\n\nDeleting a workspace requires an owner to type the workspace name. The workspace enters a read-only state for 30 days, during which an export can be produced. After 30 days the data is deleted from primary storage, and from backups on the backup rotation schedule.\n\n## Aggregates\n\nRetention applies to raw events. Usage counters and billing records are kept for seven years because finance requires them, and they contain no event payloads."
+  },
+  {
+    "id": "data-export",
+    "title": "Exporting data",
+    "kind": "guide",
+    "updated": "2026-06-27",
+    "text": "The exports endpoint creates an asynchronous export. Post a time range, a format and optional filters; the response returns an export id. Poll the id or subscribe to the export.completed webhook.\n\n## Formats\n\nJSONL is the default and preserves nested properties. CSV flattens one level and writes a header row. Parquet is available on Enterprise for warehouse loading. Every format is UTF-8 and gzip compressed.\n\n## Delivery\n\nWhen the export is ready, the API returns a signed URL valid for 24 hours. The file is deleted from export storage after seven days. Signed URLs are scoped to a single object and cannot be reused for another export.\n\n## Limits\n\nA single export covers at most 90 days and 10 million events. Larger ranges must be split. Exports count against the workspace's API rate limit but not against event volume."
+  },
+  {
+    "id": "data-regions",
+    "title": "Regions and data residency",
+    "kind": "reference",
+    "updated": "2026-05-18",
+    "text": "Workspaces are created in one of three regions: us-east-1, eu-central-1 or ap-southeast-1. The region is chosen at creation and cannot be changed in place. The region is shown on every workspace settings page and is part of the API base URL.\n\n## What stays local\n\nEvent payloads, derived indexes, exports and invoice PDFs stay in the workspace region. Metadata used for global routing, such as workspace id and region, is replicated to a control plane in the United States.\n\n## Moving a region\n\nA region move is a guided migration: Mesa creates a new workspace in the target region, replays the last 90 days of events, and switches DNS and API keys during a maintenance window. Historical data older than 90 days is not moved unless the contract requests it.\n\n## Sub-processors\n\nMesa uses one email delivery provider and one payment processor. Both are listed on the trust page with their data-processing agreements and the regions they operate in."
+  },
+  {
+    "id": "security-sso",
+    "title": "SAML single sign-on",
+    "kind": "guide",
+    "updated": "2026-08-09",
+    "text": "Team and Enterprise plans support SAML 2.0 single sign-on. Configure it under Settings, then Authentication. Mesa publishes a service provider metadata URL that contains the entity id and the assertion consumer service URL.\n\n## Setup\n\nPaste the IdP metadata URL or upload the XML. Map the email attribute and, optionally, the groups attribute. Mesa signs every SAML request and requires signed assertions; unsigned assertions are rejected.\n\n## Enforcement\n\nEnforcement is a separate switch. With enforcement on, password login is disabled for every member except one break-glass owner whose credentials are stored offline. Turning enforcement on without testing the IdP first is the most common cause of a lockout, so Mesa requires a successful test login in the previous 24 hours.\n\n## Just-in-time provisioning\n\nA first login creates the member with the mapped role. JIT provisioning is off by default; with it off, an unknown user is rejected and an admin must invite them first."
+  },
+  {
+    "id": "security-scim",
+    "title": "SCIM provisioning",
+    "kind": "reference",
+    "updated": "2026-07-07",
+    "text": "Mesa implements SCIM 2.0 for user and group provisioning on Team and Enterprise. The base URL is /scim/v2 and authentication uses a SCIM bearer token generated under Settings, then Authentication.\n\n## Resources\n\nUsers and Groups are supported. A user maps to a workspace member; a group maps to a team. The following attributes are required: userName, active and, for groups, displayName. Email is taken from the primary email value.\n\n## Deprovisioning\n\nSetting active to false removes the member's sessions within five seconds and revokes their personal API keys. It does not delete their audit history. A DELETE request removes the member record but keeps audit entries, which are immutable.\n\n## Filters\n\nList endpoints support eq filters on userName and externalId. Mesa does not support complex SCIM filters; a client that needs them should page the collection and filter locally. Provisioning changes are recorded in the audit log with actor scim."
+  },
+  {
+    "id": "security-audit-logs",
+    "title": "Audit log events",
+    "kind": "reference",
+    "updated": "2026-06-02",
+    "text": "Every state-changing action writes an audit event. Events are immutable, carry a ULID and are retained for 400 days on Team and seven years on Enterprise.\n\n## Schema\n\nAn event has id, occurred_at, actor (user, api_key or scim), action such as member.invited or key.revoked, target, ip_address and metadata. Metadata never contains secrets or event payloads, only identifiers.\n\n## Access\n\nOwners and admins can read the audit log in the dashboard and through the API. The API supports filtering by actor, action and time range, and returns results with cursor pagination.\n\n## SIEM export\n\nEnterprise workspaces can stream audit events to a webhook or an S3 bucket. Delivery uses the same signed webhook contract as product webhooks. A stream that fails for six hours raises an alert on the workspace health page, because a silent audit pipeline is worse than none."
+  },
+  {
+    "id": "guides-onboarding",
+    "title": "Your first API call",
+    "kind": "guide",
+    "updated": "2026-08-16",
+    "text": "Create a workspace, then create a sandbox API key under Settings, then API keys. The key starts with mesa_test_ and works against the same endpoints as production.\n\n## Send an event\n\nPOST /v1/events with a JSON array of up to 500 events. Each event needs name, timestamp and a user identifier. Send the key as a bearer token. A successful call returns 202 with an accepted count and a request_id.\n\n## Verify ingestion\n\nThe events query endpoint returns what was stored within a few seconds. The dashboard's live view is the quickest check. If the count is lower than expected, inspect the response body: validation errors are reported per item with a JSON Pointer, and valid items in the same batch are still accepted.\n\n## Next steps\n\nInstall one of the SDKs, or use curl. Then add the webhook signing check before wiring production traffic, so the first real event is not the first time the verification code runs. The sandbox resets every Sunday at 00:00 UTC."
+  },
+  {
+    "id": "guides-migration",
+    "title": "Migrating from another provider",
+    "kind": "guide",
+    "updated": "2026-07-15",
+    "text": "A migration has three phases: dual-write, shadow read, then cut over. Do not start by replaying history; start by sending live events to both providers.\n\n## Dual write\n\nSend the same event to Mesa and to the current provider. Batch on the client to keep latency off the request path. Compare daily totals for a week; a mismatch above 0.5% means an event naming or timestamp problem, not an ingestion bug.\n\n## Historical import\n\nThe import tool accepts JSONL with one event per line and maps fields with a JSON mapping file. Import is rate limited to 10,000 events per second and resumable by byte offset, so a failed import restarts without duplicating rows when the event id is supplied.\n\n## Shadow read\n\nRun dashboards against both providers and compare the numbers, not the charts. Retention and funnel definitions differ between products, so match the definition in the mapping document before comparing results.\n\n## Cut over\n\nSwitch the client, keep dual write for one billing period, then remove the old provider. Keep the export until the retention window has passed."
+  },
+  {
+    "id": "ops-incidents",
+    "title": "Incident severities and status page",
+    "kind": "reference",
+    "updated": "2026-08-11",
+    "text": "Mesa classifies incidents as SEV1, SEV2 or SEV3. SEV1 is a full ingestion outage or data loss risk; SEV2 is degraded ingestion, elevated errors or a regional partial outage; SEV3 is a cosmetic or single-tenant issue with a workaround.\n\n## Communication\n\nSEV1 and SEV2 incidents open a public status page entry within 15 minutes. Updates are posted every 30 minutes until resolution. Every SEV1 and SEV2 gets a written postmortem within five business days, published without customer names.\n\n## SLA credits\n\nTeam includes a 99.9% monthly uptime target. If monthly uptime falls below that target, a credit is applied automatically to the next invoice: 10% for uptime below 99.9%, 25% below 99.0%. Credits must be requested within 30 days on Enterprise contracts.\n\n## Maintenance\n\nPlanned maintenance is announced at least seven days ahead and is excluded from uptime calculations. Maintenance windows are outside business hours in the workspace region."
+  },
+  {
+    "id": "ops-backups",
+    "title": "Backups and restore",
+    "kind": "reference",
+    "updated": "2026-06-18",
+    "text": "Mesa takes a full logical backup daily and streams write-ahead logs continuously, giving a point-in-time recovery window of seven days. Backups are encrypted with a key held in a separate KMS account.\n\n## Recovery targets\n\nThe recovery point objective is five minutes for event data and the recovery time objective is four hours for a regional restore. Both targets apply to paid plans; the sandbox has no restore guarantee.\n\n## Restore requests\n\nA restore is requested by an owner from Settings, then Data, then Restore. Choose a timestamp and a target workspace. Restores never overwrite a live workspace: Mesa provisions a new workspace, replays the backup, and leaves the original untouched for comparison.\n\n## Testing\n\nA restore drill runs monthly against a copy of a production snapshot and the result is recorded on the trust page. A backup that has never been restored is a hypothesis, not a backup."
+  }
+]

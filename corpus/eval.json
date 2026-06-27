@@ -1,0 +1,254 @@
+[
+  {
+    "id": "q01",
+    "question": "How long is the webhook signature timestamp tolerance?",
+    "relevant": [
+      "webhooks-signing"
+    ]
+  },
+  {
+    "id": "q02",
+    "question": "Which header carries the webhook signature?",
+    "relevant": [
+      "webhooks-signing"
+    ]
+  },
+  {
+    "id": "q03",
+    "question": "How many times does Mesa retry a failed webhook delivery?",
+    "relevant": [
+      "webhooks-retries"
+    ]
+  },
+  {
+    "id": "q04",
+    "question": "How long does a webhook receiver have to return a 2xx response?",
+    "relevant": [
+      "webhooks-retries"
+    ]
+  },
+  {
+    "id": "q05",
+    "question": "What happens when an API rate limit is exceeded?",
+    "relevant": [
+      "api-rate-limits"
+    ]
+  },
+  {
+    "id": "q06",
+    "question": "How many requests per minute does an API key allow?",
+    "relevant": [
+      "api-rate-limits"
+    ]
+  },
+  {
+    "id": "q07",
+    "question": "Which scopes can an API key carry?",
+    "relevant": [
+      "api-auth"
+    ]
+  },
+  {
+    "id": "q08",
+    "question": "How do you rotate an API key without downtime?",
+    "relevant": [
+      "api-auth"
+    ]
+  },
+  {
+    "id": "q09",
+    "question": "What does a 409 error mean on a create call?",
+    "relevant": [
+      "api-errors"
+    ]
+  },
+  {
+    "id": "q10",
+    "question": "Which HTTP status codes are retryable?",
+    "relevant": [
+      "api-errors"
+    ]
+  },
+  {
+    "id": "q11",
+    "question": "How does cursor pagination avoid duplicate results?",
+    "relevant": [
+      "api-pagination"
+    ]
+  },
+  {
+    "id": "q12",
+    "question": "What is the highest limit value accepted on list endpoints?",
+    "relevant": [
+      "api-pagination"
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "How are annual plans refunded?",
+    "relevant": [
+      "billing-refunds"
+    ]
+  },
+  {
+    "id": "q14",
+    "question": "How long does a refund take to arrive?",
+    "relevant": [
+      "billing-refunds"
+    ]
+  },
+  {
+    "id": "q15",
+    "question": "How is a mid-cycle upgrade prorated?",
+    "relevant": [
+      "billing-proration"
+    ]
+  },
+  {
+    "id": "q16",
+    "question": "Can a plan be downgraded immediately?",
+    "relevant": [
+      "billing-proration"
+    ]
+  },
+  {
+    "id": "q17",
+    "question": "When are invoices generated?",
+    "relevant": [
+      "billing-invoices"
+    ]
+  },
+  {
+    "id": "q18",
+    "question": "How is a VAT number validated?",
+    "relevant": [
+      "billing-invoices"
+    ]
+  },
+  {
+    "id": "q19",
+    "question": "How long is event data retained on the Team plan?",
+    "relevant": [
+      "data-retention"
+    ]
+  },
+  {
+    "id": "q20",
+    "question": "What happens to a deleted workspace after 30 days?",
+    "relevant": [
+      "data-retention"
+    ]
+  },
+  {
+    "id": "q21",
+    "question": "Which export formats are supported?",
+    "relevant": [
+      "data-export"
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "How long is an export download URL valid?",
+    "relevant": [
+      "data-export"
+    ]
+  },
+  {
+    "id": "q23",
+    "question": "Which regions can a workspace be created in?",
+    "relevant": [
+      "data-regions"
+    ]
+  },
+  {
+    "id": "q24",
+    "question": "Does SAML require signed assertions?",
+    "relevant": [
+      "security-sso"
+    ]
+  },
+  {
+    "id": "q25",
+    "question": "What does SCIM deprovisioning revoke?",
+    "relevant": [
+      "security-scim"
+    ]
+  },
+  {
+    "id": "q26",
+    "question": "How long are audit log events retained?",
+    "relevant": [
+      "security-audit-logs"
+    ]
+  },
+  {
+    "id": "q27",
+    "question": "What is the recovery time objective for a regional restore?",
+    "relevant": [
+      "ops-backups"
+    ]
+  },
+  {
+    "id": "q28",
+    "question": "What uptime target does the Team plan include?",
+    "relevant": [
+      "ops-incidents"
+    ]
+  },
+  {
+    "id": "q29",
+    "question": "What is the first phase of a provider migration?",
+    "relevant": [
+      "guides-migration"
+    ]
+  },
+  {
+    "id": "q30",
+    "question": "What is the maximum number of events in one POST /v1/events request?",
+    "relevant": [
+      "guides-onboarding"
+    ]
+  },
+  {
+    "id": "q31",
+    "question": "Can I get my money back after the first month?",
+    "relevant": [
+      "billing-refunds"
+    ]
+  },
+  {
+    "id": "q32",
+    "question": "What stops a captured webhook body from being replayed?",
+    "relevant": [
+      "webhooks-signing"
+    ]
+  },
+  {
+    "id": "q33",
+    "question": "Do I need to do anything when I outgrow my plan mid-month?",
+    "relevant": [
+      "billing-proration"
+    ]
+  },
+  {
+    "id": "q34",
+    "question": "Where is my data stored if the workspace is in Europe?",
+    "relevant": [
+      "data-regions"
+    ]
+  },
+  {
+    "id": "q35",
+    "question": "What compensation applies when the service is down for a full day?",
+    "relevant": [
+      "ops-incidents"
+    ]
+  },
+  {
+    "id": "q36",
+    "question": "Can a user sign in without a password once SSO is enforced?",
+    "relevant": [
+      "security-sso"
+    ]
+  }
+]
