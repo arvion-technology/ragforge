@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>RAGForge — a RAG starter kit that runs without an API key</title>
+  <title>RAGForge | a RAG starter kit that runs without an API key</title>
   <meta name="description" content="Ingest, chunk, retrieve and evaluate with local BM25. Citation-first answers, computed in your browser." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 9 L91 91 H73 L50 52 L27 91 H9 Z' fill='%23f5c26b'/><circle cx='50' cy='31' r='6.6' fill='%230b0f1a'/><path d='M50 52 L67 90 H33 Z' fill='%230b0f1a'/></svg>" />
   <link rel="stylesheet" href="arvion.css" />
@@ -89,7 +89,7 @@
                     <div class="card-sub" id="answer-meta">waiting for the corpus</div>
                   </div>
                   <span class="spacer"></span>
-                  <span class="badge gold" id="coverage-badge">–</span>
+                  <span class="badge gold" id="coverage-badge">, </span>
                 </div>
                 <p class="answer" id="answer-text">Loading the 20-document corpus and building the index…</p>
                 <div class="col" id="citations" style="gap:10px"></div>
@@ -182,7 +182,7 @@ score = Σ idf · tf·(k1+1) / (tf + k1·(1 - b + b·len/avgdl))</pre>
                   <div class="card-sub">live JavaScript vs committed Python baseline</div>
                 </div>
                 <span class="spacer"></span>
-                <span class="badge" id="parity-badge">–</span>
+                <span class="badge" id="parity-badge">, </span>
               </div>
               <div id="eval-table"></div>
             </div>
@@ -199,7 +199,7 @@ score = Σ idf · tf·(k1+1) / (tf + k1·(1 - b + b·len/avgdl))</pre>
                 <div class="card-sub">questions phrased in a reader's words instead of the documentation's words</div>
               </div>
               <span class="spacer"></span>
-              <span class="badge red" id="miss-count">–</span>
+              <span class="badge red" id="miss-count">, </span>
             </div>
             <div id="misses"></div>
           </div>
@@ -214,7 +214,7 @@ score = Σ idf · tf·(k1+1) / (tf + k1·(1 - b + b·len/avgdl))</pre>
               <p class="lede">Twenty documents of product documentation for a fictional API platform. Each row is one file in <span class="mono">corpus/documents.json</span>.</p>
             </div>
             <span class="spacer"></span>
-            <span class="badge mono" id="corpus-tokens">–</span>
+            <span class="badge mono" id="corpus-tokens">, </span>
           </div>
           <div class="card pad-sm" style="padding:0">
             <div id="corpus-table"></div>

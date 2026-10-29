@@ -7,7 +7,7 @@ language model to rewrite the extractive answer in prose.
 All four adapters are import-safe and key-safe. Constructing one does no I/O;
 ``available()`` checks configuration; ``complete()`` raises
 ``ProviderUnavailable`` before any socket is opened when the key or host is
-missing. That is deliberate — a starter kit that crashes on import because
+missing. That is deliberate, a starter kit that crashes on import because
 ``OPENAI_API_KEY`` is unset is not a starter kit.
 """
 
@@ -209,7 +209,7 @@ def get_provider(name: str = "mock", **options) -> Provider:
 
 
 def provider_status() -> list[dict]:
-    """Configuration report for ``/health`` — never includes key values."""
+    """Configuration report for ``/health``, never includes key values."""
     return [factory().status() for factory in PROVIDERS.values()]
 
 
@@ -217,7 +217,7 @@ def complete_with_fallback(prompt: str, *, provider: str = "mock", system: str |
     """Try the requested provider, fall back to the deterministic mock.
 
     The fallback is returned with an explicit ``degraded`` flag rather than
-    silently — an answer that quietly came from a mock must not be labelled as
+    silently, an answer that quietly came from a mock must not be labelled as
     model output.
     """
     adapter = get_provider(provider)

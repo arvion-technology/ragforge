@@ -3,7 +3,7 @@
 Retrieval quality depends more on the tokeniser than on the ranking function:
 if ``policies`` and ``policy`` do not collapse to the same term, a question
 about one will miss a passage about the other. The rules below are deliberately
-small and readable instead of a full Porter stemmer — every rule is one line,
+small and readable instead of a full Porter stemmer, every rule is one line,
 and a reader can predict its output. The JavaScript port in ``src/retrieval.js``
 implements the same rules and is checked against this module by
 ``tests/test_parity.py``.
@@ -60,7 +60,7 @@ def tokenize(text: str, *, keep_stopwords: bool = False) -> list[str]:
 
 
 def unique_terms(text: str) -> list[str]:
-    """Sorted unique terms — used for coverage reporting and eval diagnostics."""
+    """Sorted unique terms, used for coverage reporting and eval diagnostics."""
     return sorted(set(tokenize(text)))
 
 

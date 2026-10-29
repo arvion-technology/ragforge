@@ -2,7 +2,7 @@
 
 The labels in ``corpus/eval.json`` were written by reading each document and
 writing the question a support engineer would actually ask. They are a small,
-hand-checked set — 30 questions over 20 documents — so the numbers are a smoke
+hand-checked set, 30 questions over 20 documents, so the numbers are a smoke
 test for retrieval changes, not a benchmark. The demo computes the same metrics
 in the browser from the same labels; ``tests/test_parity.py`` checks that the
 two implementations agree.
@@ -78,7 +78,7 @@ def evaluate(index, labeled: list[dict], *, k: int = 5) -> dict:
 
 
 def evaluate_at(index, labeled: list[dict], *, cutoffs: tuple[int, ...] = (1, 3, 5, 10)) -> dict:
-    """Metrics at several cutoffs — the shape the demo's evaluation tab plots.
+    """Metrics at several cutoffs, the shape the demo's evaluation tab plots.
 
     ``hit_rate`` rises with k and is therefore useless on its own; showing the
     curve makes it obvious that k=1 is the honest number for a chat answer with

@@ -1,4 +1,4 @@
-// RAGForge demo — rendering and interaction only.
+// RAGForge demo, rendering and interaction only.
 // The retrieval maths lives in ../src/retrieval.js, a checked port of the Python
 // package. This file builds the index, runs the labelled evaluation and paints
 // the result. It makes no network requests beyond the three local JSON files
@@ -203,7 +203,7 @@ function renderCorpus() {
         { key: "title", label: "Document", render: (row) => el("span", { class: "strong", text: row.title }) },
         { key: "kind", label: "Kind", render: (row) => el("span", { class: "badge", text: row.kind }) },
         { key: "chunks", label: "Chunks", align: "right", render: (row) => el("span", { class: "mono", text: String(row.chunks) }) },
-        { key: "updated", label: "Updated", align: "right", render: (row) => el("span", { class: "mono muted", text: row.updated || "—" }) },
+        { key: "updated", label: "Updated", align: "right", render: (row) => el("span", { class: "mono muted", text: row.updated || ", " }) },
       ],
       rows: state.documents.map((doc) => ({ ...doc, chunks: counts.get(doc.id) || 0 })),
       onRowClick: (row) => {
@@ -343,8 +343,8 @@ function renderEval() {
       el("td", { class: "num strong", text: pct(row.hit_rate) }),
       el("td", { class: "num", text: row.mrr.toFixed(3) }),
       el("td", { class: "num", text: pct(row.recall) }),
-      el("td", { class: "num muted", text: base ? pct(base.hit_rate) : "—" }),
-      el("td", { class: "num" }, el("span", { class: `delta ${Math.abs(delta) < 1e-9 ? "ok" : "bad"}`, text: base ? `${delta >= 0 ? "+" : ""}${(delta * 100).toFixed(1)}` : "—" })),
+      el("td", { class: "num muted", text: base ? pct(base.hit_rate) : ", " }),
+      el("td", { class: "num" }, el("span", { class: `delta ${Math.abs(delta) < 1e-9 ? "ok" : "bad"}`, text: base ? `${delta >= 0 ? "+" : ""}${(delta * 100).toFixed(1)}` : ", " })),
     ));
   });
   table.append(body);

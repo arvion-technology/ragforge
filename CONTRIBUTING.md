@@ -16,7 +16,7 @@ pip install -e ".[dev]"
 
 1. `python -m unittest discover -s tests -v` passes locally.
 2. New behaviour has tests and (if user-facing) documentation.
-3. The diff stays focused — one concern per pull request.
+3. The diff stays focused: one concern per pull request.
 4. Commit messages follow Conventional Commits (`feat:`, `fix:`, `docs:`).
 
 ## Reporting bugs

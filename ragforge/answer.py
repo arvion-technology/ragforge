@@ -6,7 +6,7 @@ pointer back to the chunk it came from. That has two consequences worth stating
 plainly: the wording is the corpus's wording (so it cannot hallucinate details),
 and the answer only reads well when retrieval found the right passage.
 
-When a language model is available — see ``providers.py`` — the prompt is the
+When a language model is available, see ``providers.py``, the prompt is the
 same citations, and the model is instructed to answer only from them. The
 citation list stays the contract between retrieval and generation.
 """
@@ -21,7 +21,7 @@ from .text import sentence_split, tokenize
 # before any sentence is scored. "How long" and "how many" questions are
 # answered by a sentence containing a number and a unit, so that sentence gets a
 # bonus over one that merely repeats the topic words. Without this, "How long is
-# the signature tolerance?" quotes "Every webhook delivery is signed." — true,
+# the signature tolerance?" quotes "Every webhook delivery is signed.", true,
 # cited, and useless.
 _NUMBER = r"(?:\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten|twelve|fifteen|twenty|thirty|forty|fifty|sixty|ninety|hundred)"
 _UNIT = r"(?:second|minute|hour|day|week|month|year|business\s+day)"

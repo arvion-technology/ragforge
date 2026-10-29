@@ -1,4 +1,4 @@
-"""RAGForge — a RAG starter kit that runs without an API key.
+"""RAGForge, a RAG starter kit that runs without an API key.
 
 The pieces are importable independently::
 

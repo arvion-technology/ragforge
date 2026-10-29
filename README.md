@@ -1,8 +1,8 @@
 <div align="center">
-<img src="docs/demo.gif" alt="RAGForge — cited answer with retrieval scores" width="100%" />
+<img src="docs/demo.gif" alt="RAGForge, cited answer with retrieval scores" width="100%" />
 </div>
 
-<sub>Recorded from the live demo — <a href="docs/demo.mp4">MP4</a> · <a href="docs/screenshot.png">static frame</a></sub>
+<sub>Recorded from the live demo, <a href="docs/demo.mp4">MP4</a> · <a href="docs/screenshot.png">static frame</a></sub>
 
 # RAGForge
 
@@ -119,7 +119,7 @@ score   = Σ idf(t) · tf·(k1+1) / (tf + k1·(1 - b + b·len/avgdl))
 Headings are included in the chunk's term frequency twice, and the body once.
 A heading is a human-written topic label; a section called "Rate limits" should
 outrank another document that mentions the phrase once in passing. This is still
-plain BM25 — the heading just contributes term occurrences — so there is no second
+plain BM25, the heading just contributes term occurrences, so there is no second
 scoring system to reason about. Document-level ranking takes the best-scoring
 chunk per document, because evaluation labels point at documents, not chunks.
 
@@ -162,7 +162,7 @@ committed baseline (measured, not estimated):
 | k=10 | 100% | 0.940 | 100% |
 
 The 3 misses at k=1 are questions whose wording does not appear in the
-documentation — "Can I get my money back after the first month?" instead of
+documentation, "Can I get my money back after the first month?" instead of
 "refund". That gap is the honest argument for adding embeddings later; it is
 not a bug in the tokeniser, and tuning the labels until the score is 100% would
 have hidden it. The demo shows the misses by name.
